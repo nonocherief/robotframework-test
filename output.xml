@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.12 on darwin)" generated="20220620 20:28:31.093" rpa="false" schemaversion="3">
+<suite id="s1" name="Testall" source="/Users/noracherief/Documents/robot/testall.robot">
+<test id="s1-t1" name="Query Check" line="16">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>https://refurbed.at/</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20220620 20:28:31.507" level="INFO">Opening browser 'Chrome' to base url 'https://refurbed.at/'.</msg>
+<status status="PASS" starttime="20220620 20:28:31.506" endtime="20220620 20:28:36.111"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Refurbished Elektronik mit mindestens 12 Monaten Garantie</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20220620 20:28:36.112" endtime="20220620 20:28:36.128"/>
+</kw>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${current_title}</var>
+<doc>Returns the title of the current page.</doc>
+<msg timestamp="20220620 20:28:36.133" level="INFO">${current_title} = refurbed™ – Wie neu, nur besser. Bis zu 40% günstiger.</msg>
+<status status="PASS" starttime="20220620 20:28:36.128" endtime="20220620 20:28:36.133"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${current_title}</arg>
+<arg>refurbed</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220620 20:28:36.133" endtime="20220620 20:28:36.134"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>query</arg>
+<arg>apple\n</arg>
+<arg>True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220620 20:28:36.134" level="INFO">Typing text 'apple
+' into text field 'query'.</msg>
+<status status="PASS" starttime="20220620 20:28:36.134" endtime="20220620 20:28:37.665"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Suche nach “apple”</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20220620 20:28:37.666" endtime="20220620 20:28:37.685"/>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>link:Handys</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20220620 20:28:37.686" level="INFO">Clicking link 'link:Handys'.</msg>
+<status status="PASS" starttime="20220620 20:28:37.686" endtime="20220620 20:28:39.031"/>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${link_count}</var>
+<arg>link:Fashion</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20220620 20:28:39.201" level="INFO">${link_count} = 0</msg>
+<status status="PASS" starttime="20220620 20:28:39.031" endtime="20220620 20:28:39.201"/>
+</kw>
+<if>
+<branch type="IF" condition="${link_count} &gt; 0">
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>link:Fashion</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20220620 20:28:39.202" endtime="20220620 20:28:39.202"/>
+</kw>
+<status status="NOT RUN" starttime="20220620 20:28:39.202" endtime="20220620 20:28:39.202"/>
+</branch>
+<branch type="ELSE">
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>link:Bekleidung</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20220620 20:28:39.202" level="INFO">Clicking link 'link:Bekleidung'.</msg>
+<status status="PASS" starttime="20220620 20:28:39.202" endtime="20220620 20:28:41.486"/>
+</kw>
+<status status="PASS" starttime="20220620 20:28:39.202" endtime="20220620 20:28:41.486"/>
+</branch>
+<status status="PASS" starttime="20220620 20:28:39.201" endtime="20220620 20:28:41.486"/>
+</if>
+<status status="PASS" starttime="20220620 20:28:31.505" endtime="20220620 20:28:41.487"/>
+</test>
+<test id="s1-t2" name="Do a GET Request and validate the response code and response body" line="31">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>https://api.refurbed.io/</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220620 20:28:41.490" level="INFO">Creating Session using : alias=mysession, url=https://api.refurbed.io/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220620 20:28:41.490" endtime="20220620 20:28:41.490"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/v1/categories/id/27/</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220620 20:28:41.597" level="INFO">GET Request : url=https://api.refurbed.io/v1/categories/id/27/ 
+ path_url=/v1/categories/id/27/ 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220620 20:28:41.597" level="INFO">GET Response : url=https://api.refurbed.io/v1/categories/id/27/ 
+ status=200, reason=OK 
+ headers={'Server': 'nginx', 'Date': 'Mon, 20 Jun 2022 18:28:41 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'max-age=15, public', 'Pragma': 'public', 'Refb-Request-Id': '94590256-c0d7-4367-a260-771d81c426fb', 'Refb-Version': 'bda4bbd9', 'X-Frame-Options': 'SAMEORIGIN', 'Content-Encoding': 'gzip', 'Via': '1.1 google', 'Alt-Svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'Transfer-Encoding': 'chunked'} 
+ body={"id":27,"created_at":"2017-11-06T09:08:59.8937Z","updated_at":"2022-04-21T10:08:08.639616Z","path":"1","slug":"huawei-phones","slug_de":"huawei-phones","slug_en":"huawei-phones","slug_it":"telefoni-huawei","slug_pl":"telefony-huawei","slug_fr":"telephones-huawei","slug_sv":"huawei-mobiltelefoner","slug_sl":"huawei-phones","slug_da":"huawei-telefoner","slug_nl":"huawei-telefoons","brand":"huawei","name":"Huawei Handys","name_de":"Huawei Handys","name_en":"Huawei Phones","name_it":"Cellulari Huawei","name_pl":"Telefony Huawei","name_fr":"Téléphones Huawei","name_sv":"Huawei Mobiltelefoner","name_sl":"Huawei Phones","name_da":"Huawei, mobiltelefoner","name_nl":"Huawei Mobiele Telefoons","short_name":"Huawei","short_name_de":"Huawei","short_name_en":"Huawei","short_name_it":"Huawei","short_name_pl":"Huawei","short_name_fr":"Huawei","short_name_sv":"Huawei","short_name_sl":"Huawei Phones","short_name_da":"Huawei ","short_name_nl":"Huawei","description":"## Du willst dir ein Huawei Handy zum günstigen Preis kaufen, weißt aber nicht, welches das Richtige für dich ist?\r\n\r\nHuawei Handys bieten dir eine günstige Alternative zu den teuren \u003ca href=\"/c/iphones/\"\u003eApple iPhones\u003c/a\u003e –\r\nohne, dass du an Qualität einbüßen musst. Mit künstlicher Intelligenz,\r\nfarbintensiven Displays und modernsten Kameras machen die Huawei Smartphones\r\nanderen High End Modellen Konkurrenz und setzen neue Standards. Bei refurbed\r\nfindest du das passende Gerät für deine Bedürfnisse und zahlst bis zu 40%\r\nweniger.\r\n\r\n## Günstiger Preis und schnelle Performance: Dein nachhaltiges Huawei\r\n\r\nMit deinem refurbed™ Huawei genießt du vollkommene Freiheit: Du erwirbst es ohne\r\nVertrag und ohne SIM-Lock – es ist also frei für alle Netze. Alle refurbed™\r\nHuawei Smartphones werden in bis zu 40 Schritten sorgfältig überprüft und vollständig\r\nerneuert. Dadurch wird aus einem gebrauchten Handy ein Refurbished Produkt, das\r\naussieht wie neu und funktioniert wie neu. Außerdem kommt jedes refurbed™ Huawei Handy\r\nmit min. 12 Monaten Garantie. Immer noch nicht überzeugt? Dann teste jetzt das\r\nHuawei deiner Träume 30 Tage lang kostenlos.","description_de":"## Du willst dir ein Huawei Handy zum günstigen Preis kaufen, weißt aber nicht, welches das Richtige für dich ist?\r\n\r\nHuawei Handys bieten dir eine günstige Alternative zu den teuren \u003ca href=\"/c/iphones/\"\u003eApple iPhones\u003c/a\u003e –\r\nohne, dass du an Qualität einbüßen musst. Mit künstlicher Intelligenz,\r\nfarbintensiven Displays und modernsten Kameras machen die Huawei Smartphones\r\nanderen High End Modellen Konkurrenz und setzen neue Standards. Bei refurbed\r\nfindest du das passende Gerät für deine Bedürfnisse und zahlst bis zu 40%\r\nweniger.\r\n\r\n## Günstiger Preis und schnelle Performance: Dein nachhaltiges Huawei\r\n\r\nMit deinem refurbed™ Huawei genießt du vollkommene Freiheit: Du erwirbst es ohne\r\nVertrag und ohne SIM-Lock – es ist also frei für alle Netze. Alle refurbed™\r\nHuawei Smartphones werden in bis zu 40 Schritten sorgfältig überprüft und vollständig\r\nerneuert. Dadurch wird aus einem gebrauchten Handy ein Refurbished Produkt, das\r\naussieht wie neu und funktioniert wie neu. Außerdem kommt jedes refurbed™ Huawei Handy\r\nmit min. 12 Monaten Garantie. Immer noch nicht überzeugt? Dann teste jetzt das\r\nHuawei deiner Träume 30 Tage lang kostenlos.","description_en":"","description_it":"","description_pl":"","description_fr":"","description_sv":"","description_sl":"","description_da":"","description_nl":"","google_id":267,"ebay_id":173,"is_root":false,"level":2,"parent_id":1,"type":"electronics"} 
+ </msg>
+<msg timestamp="20220620 20:28:41.598" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220620 20:28:41.490" endtime="20220620 20:28:41.598"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220620 20:28:41.598" endtime="20220620 20:28:41.599"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${id}</var>
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220620 20:28:41.630" level="INFO">${id} = [27]</msg>
+<status status="PASS" starttime="20220620 20:28:41.599" endtime="20220620 20:28:41.630"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${id}[0]</arg>
+<arg>27</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20220620 20:28:41.631" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220620 20:28:41.631" endtime="20220620 20:28:41.631"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20220620 20:28:41.631" endtime="20220620 20:28:41.814"/>
+</kw>
+<doc>This test case verifies that the response code of the GET Request should be 200,
+the response body contains the 'title' key with value as 'REFURBED',
+and the response body contains the key 'location_type'.</doc>
+<tag>REFURBED</tag>
+<status status="PASS" starttime="20220620 20:28:41.488" endtime="20220620 20:28:41.814"/>
+</test>
+<doc>Example SeleniumLibrary</doc>
+<status status="PASS" starttime="20220620 20:28:31.094" endtime="20220620 20:28:41.816"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">REFURBED</stat>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="Testall">Testall</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
